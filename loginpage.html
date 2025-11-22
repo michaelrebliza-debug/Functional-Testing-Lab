@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>UC Student Portal Login</title>
+    <style>
+        body { 
+            font-family: Arial; 
+            padding: 40px; 
+        }
+        .container { 
+            width: 300px; 
+            margin: auto; 
+        }
+        input { 
+            width: 100%; 
+            padding: 8px; 
+            margin: 6px 0; 
+        }
+        button { 
+            padding: 10px; 
+            width: 100%; 
+        }
+        .message { 
+            margin-top: 15px; 
+            font-weight: bold; 
+            color: red; 
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h3>UC Student Portal Login</h3>
+
+        <input id="username" type="text" placeholder="Username">
+        <input id="password" type="password" placeholder="Password">
+        <button onclick="login()">Login</button>
+
+        <div id="msg" class="message"></div>
+    </div>
+
+    <script>
+        let attempts = 0;
+
+        function login() {
+            let u = document.getElementById('username').value;
+            let p = document.getElementById('password').value;
+            let msg = document.getElementById('msg');
+
+            if (!u || !p) {
+                msg.innerHTML = "All fields are required.";
+                return;
+            }
+
+            if (p.length < 8) {
+                msg.innerHTML = "Password must be at least 8 characters.";
+                return;
+            }
+
+            if (u === "student01" && p === "validPass123") {
+                msg.style.color = "green";
+                msg.innerHTML = "Login successful!";
+                attempts = 0;
+                return;
+            }
+
+            attempts++;
+
+            if (attempts >= 3) {
+                msg.innerHTML = "Your account is locked. Contact administrator.";
+                return;
+            }
+
+            msg.innerHTML = "Invalid login credentials.";
+        }
+    </script>
+
+</body>
+</html>
